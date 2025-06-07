@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Temp Mail Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ece9e6, #ffffff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 40px 30px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+    .title {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .output {
+      background: #f9f9f9;
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: left;
+      font-size: 14px;
+      white-space: pre-wrap;
+    }
+    .footer {
+      font-size: 12px;
+      margin-top: 20px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="title">Temp Mail Generator</div>
+    <button onclick="generate()">Generate Email</button>
+    <div class="output" id="output">Click the button to get your temporary email.</div>
+    <div class="footer">
+      Api Provider: <a href="https://t.me/treasure_king_tk">treasure_king_tk</a><br>
+      VIP Channel: <a href="https://t.me/+CZui8RQStGlkNGVl">Join VIP</a><br>
+      Developer: <a href="https://t.me/IslamTanvir0">Md Tanvir Islam</a>
+    </div>
+  </div>
+
+  <script>
+    async function generate() {
+      const output = document.getElementById('output');
+      output.textContent = "Generating...";
+
+      try {
+        const res = await fetch('/api/gen');
+        const data = await res.json();
+
+        if (data.status === 'success') {
+          output.textContent = `Email: ${data.email}\n\nGenerated successfully!`;
+        } else {
+          output.textContent = 'Failed to generate email.';
+        }
+      } catch (e) {
+        output.textContent = 'Error occurred. Try again.';
+      }
+    }
+  </script>
+</body>
+</html>
